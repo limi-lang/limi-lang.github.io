@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title></title>
-        <base href="/">
+        <title>Type System - Limi Language Report</title>
 
 
         <!-- Custom HTML head -->
@@ -82,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="rationale.html"><strong aria-hidden="true">2.</strong> Rationale</a></li><li class="chapter-item expanded "><a href="type_system.html"><strong aria-hidden="true">3.</strong> Type System</a></li><li class="chapter-item expanded "><a href="programs.html"><strong aria-hidden="true">4.</strong> Programs</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="rationale.html"><strong aria-hidden="true">2.</strong> Rationale</a></li><li class="chapter-item expanded "><a href="type_system.html" class="active"><strong aria-hidden="true">3.</strong> Type System</a></li><li class="chapter-item expanded "><a href="programs.html"><strong aria-hidden="true">4.</strong> Programs</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,14 +142,62 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="document-not-found-404"><a class="header" href="#document-not-found-404">Document not found (404)</a></h1>
-<p>This URL is invalid, sorry. Please use the navigation bar or search to continue.</p>
+                        <h1 id="type-system"><a class="header" href="#type-system">Type System</a></h1>
+<h3 id="data-constructors"><a class="header" href="#data-constructors">Data Constructors</a></h3>
+<p>Sum type declarations are distributed over several lines.</p>
+<pre><code>true  : Bool
+false : Bool
+</code></pre>
+<p>Translated as:</p>
+<pre><code>data Bool = true | false
+</code></pre>
+<p>Constructor Declarations can contain variables. We assume that T and Tree<T> are already defined and in scope</p>
+<pre><code>    t: T
+=&gt; Leaf(t) : Tree&lt;T&gt;
+
+    left : Tree&lt;T&gt;
+    right : Tree&lt;T&gt;
+=&gt; Node(left, right) : Tree&lt;T&gt;
+</code></pre>
+<p>Is roughly equivalent to:</p>
+<pre><code>data Tree&lt;T&gt; = Leaf(T) | Node(Tree&lt;T&gt;, Tree&lt;T&gt;)
+</code></pre>
+<p>The left hand side after the implication can be a mix fix operator</p>
+<pre><code>    A : Set
+    B : Set
+=&gt; A -&gt; B : Set
+</code></pre>
+<p>is translated as</p>
+<pre><code>data Set = _ -&gt; _ (Set, Set)
+</code></pre>
+<h3 id="mixfix-operators"><a class="header" href="#mixfix-operators">Mixfix operators</a></h3>
+<p>Data Type Declarations automatically declare mixfix operators. The two examples in the previous section also declare the
+following mixfix operators.</p>
+<pre><code>Leaf ( _ ) : T -&gt; Tree&lt;T&gt;
+Node ( _ , _ ) : (Tree&lt;T&gt;, Tree&lt;T&gt;) -&gt; Tree&lt;T&gt;
+_ -&gt; _ : (Set, Set) -&gt; Set
+</code></pre>
+<p>The free mixfix operators pay for the slightly more verbose syntax. Actually the declared variables can be reused many times.</p>
+<h3 id="function-declarations"><a class="header" href="#function-declarations">Function Declarations.</a></h3>
+<p>The syntax for function declarations is exactly the same as that for Type Declarations.</p>
+<pre><code>   x : Nat
+=&gt; fact(x) : Int
+</code></pre>
+<p>In the same way the syntax defines a mixfix operator.</p>
+<pre><code>fact ( _ ) : Nat -&gt; Int
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="rationale.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next" href="programs.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -158,7 +205,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="rationale.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next" href="programs.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
