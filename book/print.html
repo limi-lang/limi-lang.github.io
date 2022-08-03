@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Limi Language Report</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="rationale.html"><strong aria-hidden="true">2.</strong> Rationale</a></li><li class="chapter-item expanded "><a href="type_system.html"><strong aria-hidden="true">3.</strong> Type System</a></li><li class="chapter-item expanded "><a href="programs.html"><strong aria-hidden="true">4.</strong> Programs</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Limi Language Report</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<p>Limi is a multi-paradigm functional-logic language. It is designed to be an un-versioned interface between a programmer and a computer. It default operational semantics are based on lazy needed narrowing and residuation.</p>
+<p>Limi abstracts over persistent file storage and the network just like current languages abstract over access to main memory</p>
+<p>The language is still in development
+Please contact edmugabi (at) gmail (dot) com</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="rationale"><a class="header" href="#rationale">Rationale</a></h1>
+<p>Software systems currently have systemic problems. These problems are endemic to the industry and exist due to the architecture of the tools and processes used to design software systems.
+These problems include; </p>
+<ul>
+<li>Software Security</li>
+<li>Software Complexity</li>
+<li>Software Compartibility / Interoperability</li>
+<li>Dependency Hell</li>
+<li>Abstraction Hell</li>
+<li>State Management</li>
+<li>Software bloat and duplication</li>
+<li>Technical debt</li>
+<li>Poor abstractions / Abstraction abuse</li>
+<li>Losing the forest for the trees</li>
+<li>Change fatigue</li>
+<li>Obsolescence</li>
+<li>Failure to separate concerns</li>
+<li>Backwards compartibility</li>
+<li>Abstraction leakage ( control transfer is a low level concern)</li>
+<li>Lost productivity in learning exercises</li>
+<li>Smallest unit of production code</li>
+</ul>
+<p>Needs a mathematically modelled solution. Access to IO, Process Modelling
+Some solutions are bolten on
+Software errors are very expensive. ( Solution Mathematical rigor ), we should treat  a software package as rigorously as a mathematical theorem</p>
+<p>Limi is a multi-paradigm programming system. It is more than a language. 
+Mathematicians admit that there is no known solution to an open problem. Business people make it work</p>
+<p>Solution
+Holistic abstractions</p>
+<p>Glossary
+Accidental investigation techniques
+Safety critical applications</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="type-system"><a class="header" href="#type-system">Type System</a></h1>
+<h3 id="data-constructors"><a class="header" href="#data-constructors">Data Constructors</a></h3>
+<p>Sum type declarations are distributed over several lines.</p>
+<pre><code>true  : Bool
+false : Bool
+</code></pre>
+<p>Translated as:</p>
+<pre><code>data Bool = true | false
+</code></pre>
+<p>Constructor Declarations can contain variables. We assume that T and Tree<T> are already defined and in scope</p>
+<pre><code>    t: T
+=&gt; Leaf(t) : Tree&lt;T&gt;
+
+    left : Tree&lt;T&gt;
+    right : Tree&lt;T&gt;
+=&gt; Node(left, right) : Tree&lt;T&gt;
+</code></pre>
+<p>Is roughly equivalent to:</p>
+<pre><code>data Tree&lt;T&gt; = Leaf(T) | Node(Tree&lt;T&gt;, Tree&lt;T&gt;)
+</code></pre>
+<p>The left hand side after the implication can be a mix fix operator</p>
+<pre><code>    A : Set
+    B : Set
+=&gt; A -&gt; B : Set
+</code></pre>
+<p>is translated as</p>
+<pre><code>data Set = _ -&gt; _ (Set, Set)
+</code></pre>
+<h3 id="mixfix-operators"><a class="header" href="#mixfix-operators">Mixfix operators</a></h3>
+<p>Data Type Declarations automatically declare mixfix operators. The two examples in the previous section also declare the
+following mixfix operators.</p>
+<pre><code>Leaf ( _ ) : T -&gt; Tree&lt;T&gt;
+Node ( _ , _ ) : (Tree&lt;T&gt;, Tree&lt;T&gt;) -&gt; Tree&lt;T&gt;
+_ -&gt; _ : (Set, Set) -&gt; Set
+</code></pre>
+<p>The free mixfix operators pay for the slightly more verbose syntax. Actually the declared variables can be reused many times.</p>
+<h3 id="function-declarations"><a class="header" href="#function-declarations">Function Declarations.</a></h3>
+<p>The syntax for function declarations is exactly the same as that for Type Declarations.</p>
+<pre><code>   x : Nat
+=&gt; fact(x) : Int
+</code></pre>
+<p>In the same way the syntax defines a mixfix operator.</p>
+<pre><code>fact ( _ ) : Nat -&gt; Int
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="programs"><a class="header" href="#programs">Programs</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>

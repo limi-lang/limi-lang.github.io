@@ -1,3 +1,5 @@
 # Summary
-
-- [Chapter 1](./chapter_1.md)
+- [Introduction](./introduction.md)
+- [Rationale](./rationale.md)
+- [Type System](./type_system.md)
+- [Programs](./programs.md)
